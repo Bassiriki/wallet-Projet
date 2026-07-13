@@ -48,7 +48,6 @@ export function AddTransactionForm() {
           occurredAt: new Date(date).toISOString(),
         })
         router.push('/')
-        router.refresh()
       } catch {
         setError("Impossible d'enregistrer la transaction")
       }
