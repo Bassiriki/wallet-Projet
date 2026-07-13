@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+}
+
+/* Purple / White — Daba-style light mobile theme */
+:root {
+  color-scheme: light;
+
+  --background: #F7F5FF;
+  --foreground: #1A0A3C;
+
+  --card: #FFFFFF;
+  --card-foreground: #1A0A3C;
+
+  --popover: #FFFFFF;
+  --popover-foreground: #1A0A3C;
+
+  /* Teal primary */
+  --primary: #188775;
+  --primary-foreground: #FFFFFF;
+
+  --secondary: #E2F3F0;
+  --secondary-foreground: #188775;
+
+  --muted: #E2F3F0;
+  --muted-foreground: #6B968F;
+
+  --accent: #D4EBE7;
+  --accent-foreground: #188775;
+
+  --destructive: #E53935;
+  --destructive-foreground: #FFFFFF;
+
+  --success: #22C55E;
+  --success-foreground: #FFFFFF;
+
+  --border: #D4EBE7;
+  --input: #D4EBE7;
+  --ring: #188775;
+
+  /* Charts */
+  --chart-1: #188775;
+  --chart-2: #22C55E;
+  --chart-3: #E53935;
+  --chart-4: #F59E0B;
+  --chart-5: #06B6D4;
+
+  --radius: 0rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+/* Utility animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+.animate-fade-in-up {
+  animation: fadeInUp 0.45s ease both;
+}
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
