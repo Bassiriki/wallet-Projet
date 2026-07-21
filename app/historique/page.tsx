@@ -6,10 +6,12 @@ import { AppShell } from '@/components/app-shell'
 import { HistoryList } from '@/components/history-list'
 
 export default async function HistoriquePage() {
-  const session = await auth.api.getSession({ headers: await headers() })
+  // ⚡ Parallel fetch
+  const [session, txs] = await Promise.all([
+    auth.api.getSession({ headers: await headers() }),
+    getTransactions().catch(() => [] as Awaited<ReturnType<typeof getTransactions>>),
+  ])
   if (!session?.user) redirect('/sign-in')
-
-  const txs = await getTransactions()
 
   return (
     <AppShell>

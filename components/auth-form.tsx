@@ -60,7 +60,7 @@ export function AuthForm({ mode }: { mode: 'sign-in' | 'sign-up' }) {
           </p>
         </div>
 
-        <div className="rounded-3xl border border-border bg-card p-6">
+        <div className="rounded-3xl border border-border/80 bg-card p-6 shadow-xl backdrop-blur-md">
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             {isSignUp && (
               <div className="flex flex-col gap-2">
@@ -71,7 +71,7 @@ export function AuthForm({ mode }: { mode: 'sign-in' | 'sign-up' }) {
                   onChange={(e) => setName(e.target.value)}
                   required
                   autoComplete="name"
-                  className="h-12 rounded-xl"
+                  className="h-12 rounded-2xl"
                 />
               </div>
             )}
@@ -84,7 +84,7 @@ export function AuthForm({ mode }: { mode: 'sign-in' | 'sign-up' }) {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 autoComplete="email"
-                className="h-12 rounded-xl"
+                className="h-12 rounded-2xl"
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -97,7 +97,7 @@ export function AuthForm({ mode }: { mode: 'sign-in' | 'sign-up' }) {
                 required
                 minLength={8}
                 autoComplete={isSignUp ? 'new-password' : 'current-password'}
-                className="h-12 rounded-xl"
+                className="h-12 rounded-2xl"
               />
             </div>
 
@@ -110,7 +110,7 @@ export function AuthForm({ mode }: { mode: 'sign-in' | 'sign-up' }) {
             <Button
               type="submit"
               disabled={loading}
-              className="w-full h-12 rounded-xl text-base font-semibold"
+              className="w-full h-12 rounded-2xl text-base font-semibold transition-all active:scale-95"
               style={{
                 background: 'linear-gradient(135deg, #106655 0%, #188775 40%, #1CA38D 75%, #0F5C4F 100%)',
                 boxShadow: '0 8px 32px rgba(24, 135, 117, 0.4)',

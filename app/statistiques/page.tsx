@@ -6,10 +6,12 @@ import { AppShell } from '@/components/app-shell'
 import { StatsView } from '@/components/stats-view'
 
 export default async function StatistiquesPage() {
-  const session = await auth.api.getSession({ headers: await headers() })
+  // ⚡ Parallel fetch
+  const [session, txs] = await Promise.all([
+    auth.api.getSession({ headers: await headers() }),
+    getTransactions().catch(() => [] as Awaited<ReturnType<typeof getTransactions>>),
+  ])
   if (!session?.user) redirect('/sign-in')
-
-  const txs = await getTransactions()
 
   return (
     <AppShell>

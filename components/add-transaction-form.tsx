@@ -76,7 +76,7 @@ export function AddTransactionForm() {
       </div>
 
       {/* Amount */}
-      <div className="mt-6 rounded-3xl bg-card p-6 text-center">
+      <div className="mt-6 rounded-3xl border border-border/60 bg-card p-6 text-center shadow-sm">
         <Label htmlFor="amount" className="text-sm text-muted-foreground">
           Montant
         </Label>
@@ -107,11 +107,11 @@ export function AddTransactionForm() {
                   key={c.value}
                   type="button"
                   onClick={() => setCategory(c.value)}
-                  className="flex flex-col items-center gap-1.5"
+                  className="flex flex-col items-center gap-1.5 active:scale-95 transition-transform"
                 >
                   <span
                     className={cn(
-                      'flex h-14 w-14 items-center justify-center rounded-2xl border transition-colors',
+                      'flex h-14 w-14 items-center justify-center rounded-2xl border transition-colors shadow-xs',
                       active
                         ? 'border-primary bg-primary/15 text-primary'
                         : 'border-border bg-card text-muted-foreground',
@@ -122,7 +122,7 @@ export function AddTransactionForm() {
                   <span
                     className={cn(
                       'text-center text-[11px] leading-tight',
-                      active ? 'text-foreground' : 'text-muted-foreground',
+                      active ? 'text-foreground font-semibold' : 'text-muted-foreground',
                     )}
                   >
                     {c.label}
@@ -150,7 +150,7 @@ export function AddTransactionForm() {
                 ? 'Ex : Remboursement, vente...'
                 : 'Ex : Taxi aéroport'
           }
-          className="h-12 rounded-xl"
+          className="h-12 rounded-2xl"
         />
       </div>
 
@@ -162,7 +162,7 @@ export function AddTransactionForm() {
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="h-12 rounded-xl"
+          className="h-12 rounded-2xl"
         />
       </div>
 
@@ -175,7 +175,7 @@ export function AddTransactionForm() {
       <Button
         type="submit"
         disabled={pending}
-        className="mt-6 h-13 w-full rounded-xl py-3.5 text-base font-semibold"
+        className="mt-6 h-13 w-full rounded-2xl py-3.5 text-base font-semibold transition-all active:scale-95"
       >
         {pending ? 'Enregistrement...' : 'Enregistrer'}
       </Button>

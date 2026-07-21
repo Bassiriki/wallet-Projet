@@ -102,7 +102,7 @@ export function StatsView({ transactions }: { transactions: Transaction[] }) {
       </div>
 
       {/* Donut of expenses by category */}
-      <div className="mt-6 rounded-none bg-card p-6">
+      <div className="mt-6 rounded-3xl border border-border/60 bg-card p-6 shadow-sm">
         <h2 className="font-semibold text-foreground">Dépenses par catégorie</h2>
         {byCategory.length === 0 ? (
           <p className="mt-6 text-center text-sm text-muted-foreground">
@@ -174,7 +174,7 @@ export function StatsView({ transactions }: { transactions: Transaction[] }) {
       </div>
 
       {/* Monthly income vs expense */}
-      <div className="mt-6 rounded-none bg-card p-6">
+      <div className="mt-6 rounded-3xl border border-border/60 bg-card p-6 shadow-sm">
         <h2 className="font-semibold text-foreground">Revenus vs Dépenses</h2>
         <p className="mb-4 text-xs text-muted-foreground">6 derniers mois</p>
         {monthly.length === 0 ? (

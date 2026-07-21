@@ -48,12 +48,12 @@ export function TransactionItem({
 
   return (
     <div
-      className="flex items-center gap-3 rounded-none px-3 py-3 transition-all hover:bg-white/70"
-      style={{ background: 'rgba(255,255,255,0.6)' }}
+      className="flex items-center gap-3 rounded-2xl px-3.5 py-3 transition-all hover:bg-white/90 shadow-sm border border-border/30 mb-2"
+      style={{ background: 'rgba(255,255,255,0.75)', backdropFilter: 'blur(8px)' }}
     >
       {/* Icon */}
       <div
-        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-none"
+        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl shadow-xs"
         style={{ background: bg }}
       >
         <TxIcon type={tx.type} category={tx.category} className="h-5 w-5" style={{ color }} />
@@ -97,7 +97,7 @@ export function TransactionItem({
               }
               startTransition(() => deleteTransaction(tx.id))
             }}
-            className="flex h-8 w-8 items-center justify-center rounded-full transition-colors"
+            className="flex h-8 w-8 items-center justify-center rounded-full transition-colors active:scale-90"
             style={
               confirm
                 ? { background: '#FEE2E2', color: '#DC2626' }

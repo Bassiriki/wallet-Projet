@@ -19,10 +19,14 @@ import {
 } from 'lucide-react'
 
 export default async function HomePage() {
-  const session = await auth.api.getSession({ headers: await headers() })
+  // ⚡ Fetch session and transactions in parallel
+  const [session, txs] = await Promise.all([
+    auth.api.getSession({ headers: await headers() }),
+    getTransactions().catch(() => [] as Awaited<ReturnType<typeof getTransactions>>),
+  ])
+
   if (!session?.user) redirect('/sign-in')
 
-  const txs = await getTransactions()
   const monthTxs = txs.filter((t) => isSameMonth(t.occurredAt))
   const summary = computeSummary(monthTxs)
   const recent = txs.slice(0, 6)
@@ -192,7 +196,7 @@ export default async function HomePage() {
                 className="mb-2 inline-block rounded-full px-2.5 py-0.5 text-xs font-bold text-white"
                 style={{ background: 'rgba(255,255,255,0.25)' }}
               >
-                portefeuille ✦
+                portefeuille  
               </div>
               <p className="text-white font-bold text-base leading-snug">
                 Suivez vos finances plus facilement
