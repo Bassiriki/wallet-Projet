@@ -19,9 +19,9 @@ export function BottomNav() {
   const pathname = usePathname()
 
   return (
-    <div className="fixed bottom-6 left-1/2 z-40 -translate-x-1/2">
+    <div className="fixed bottom-6 left-1/2 z-40 -translate-x-1/2 w-[92%] max-w-[400px]">
       <nav
-        className="flex items-center justify-between gap-1 px-5 py-3 transition-all duration-200"
+        className="flex items-center justify-between w-full px-2 py-3 transition-all duration-200"
         style={{
           background: '#FFFFFF',
           borderRadius: 28,
@@ -38,13 +38,12 @@ export function BottomNav() {
               <Link
                 key={item.label}
                 href={item.href}
-                className="mx-3 flex items-center justify-center rounded-full transition-transform duration-150 active:scale-90"
+                className="mx-1 flex items-center justify-center rounded-full transition-transform duration-150 active:scale-90 shrink-0"
                 style={{
                   width: 52,
                   height: 52,
                   background: 'linear-gradient(135deg, #106655, #1CA38D)',
                   boxShadow: '0 6px 18px rgba(24,135,117,0.45)',
-                  flexShrink: 0,
                 }}
               >
                 <Icon className="h-6 w-6 text-white" strokeWidth={2.8} />
@@ -57,8 +56,7 @@ export function BottomNav() {
             <Link
               key={item.label}
               href={item.href}
-              className="relative flex flex-col items-center justify-center gap-1.5 px-3 py-1 transition-transform duration-150 active:scale-90"
-              style={{ minWidth: 44 }}
+              className="relative flex flex-1 flex-col items-center justify-center gap-1.5 py-1 transition-transform duration-150 active:scale-90"
             >
               <Icon
                 className="h-[22px] w-[22px] transition-all duration-200"

@@ -24,10 +24,10 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET') return
 
   const url = new URL(request.url)
-  // Never cache auth or API calls — always hit the network.
+  // Never cache auth or API calls
   if (url.pathname.startsWith('/api')) return
 
-  // Network-first for navigations, fall back to cache when offline.
+  // Network-first for navigations
   if (request.mode === 'navigate') {
     event.respondWith(
       fetch(request)
@@ -41,19 +41,44 @@ self.addEventListener('fetch', (event) => {
     return
   }
 
-  // Cache-first for static assets.
-  event.respondWith(
-    caches.match(request).then((cached) => {
-      return (
-        cached ||
-        fetch(request).then((response) => {
+  // Cache Next.js Data payloads (RSC) with Network-First to avoid stale data!
+  if (request.headers.get('RSC') === '1' || url.pathname.includes('/_next/data/')) {
+    event.respondWith(
+      fetch(request).catch(() => caches.match(request))
+    )
+    return
+  }
+
+  // Cache-first ONLY for static assets (_next/static, images, etc.)
+  const isStatic = url.pathname.startsWith('/_next/static/') || url.pathname.match(/\.(png|jpg|jpeg|svg|gif|woff2|woff|css|js)$/i)
+  
+  if (isStatic) {
+    event.respondWith(
+      caches.match(request).then((cached) => {
+        return (
+          cached ||
+          fetch(request).then((response) => {
+            if (url.origin === self.location.origin) {
+              const copy = response.clone()
+              caches.open(CACHE_NAME).then((cache) => cache.put(request, copy))
+            }
+            return response
+          })
+        )
+      })
+    )
+  } else {
+    // Network-first for everything else
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
           if (url.origin === self.location.origin) {
             const copy = response.clone()
             caches.open(CACHE_NAME).then((cache) => cache.put(request, copy))
           }
           return response
         })
-      )
-    }),
-  )
+        .catch(() => caches.match(request))
+    )
+  }
 })

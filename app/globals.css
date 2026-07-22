@@ -140,7 +140,6 @@
 a, button {
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
-  will-change: transform;
 }
 
 /* Smooth scroll for lists */

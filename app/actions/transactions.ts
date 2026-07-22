@@ -82,3 +82,32 @@ export async function deleteTransaction(id: number) {
   revalidatePath('/historique')
   revalidatePath('/statistiques')
 }
+
+export async function updateTransaction(
+  id: number,
+  input: {
+    type?: TxType
+    amount?: number
+    category?: string | null
+    description?: string | null
+    occurredAt?: string
+  }
+) {
+  const userId = await getUserId()
+
+  const updates: any = {}
+  if (input.type) updates.type = input.type
+  if (input.amount !== undefined) updates.amount = input.amount.toFixed(2)
+  if (input.category !== undefined) updates.category = input.category
+  if (input.description !== undefined) updates.description = input.description
+  if (input.occurredAt) updates.occurredAt = new Date(input.occurredAt)
+
+  await db
+    .update(transactions)
+    .set(updates)
+    .where(and(eq(transactions.id, id), eq(transactions.userId, userId)))
+
+  revalidatePath('/')
+  revalidatePath('/historique')
+  revalidatePath('/statistiques')
+}
